@@ -9,7 +9,7 @@
 
 A powerful and customizable animated text view for iOS that supports Markdown rendering with character-by-character animation effects. Perfect for creating engaging reading experiences, interactive tutorials, or dynamic content displays.
 
-[中文版本](README.md)
+[中文版本](README_CN.md)
 
 ## ✨ Features
 
