@@ -6,7 +6,9 @@ AnimationTextView
   <img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat" alt="License MIT" />
 </p>
 一个功能强大且可自定义的 iOS 动画文本视图，支持 Markdown 渲染和逐字符动画效果。非常适合创建引人入胜的阅读体验、交互式教程或动态内容展示。
-English Version
+
+[中文版本](README_English.md)
+
 ✨ 特性
 
 🎯 逐字符动画 - 每个字符都带有流畅的动画效果
@@ -52,7 +54,6 @@ AnimationTextView/
     ├── AnimationSelectionHandleView.swift    // 选择手柄 UI
     ├── AnimationStreamTextUIView.swift       // 主 UIView 实现
     └── AnimationTextSelectionView.swift      // 选择覆盖层视图
-
 
 🚀 快速开始
 
