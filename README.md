@@ -25,7 +25,7 @@ A powerful and customizable animated text view for iOS that supports Markdown re
 ## 📸 Screenshots
 
 ![Image](https://github.com/user-attachments/assets/4fee3ebf-5c72-4884-ad82-e13b020e4df4)
-
+![Image](https://github.com/user-attachments/assets/3ff8dc23-2e25-4e05-8411-78b6251c1324)
 
 ## 📦 Installation
 
