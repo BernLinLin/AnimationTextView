@@ -128,13 +128,27 @@ class ViewController: UIViewController {
 - **Lists** - `- item` or `1. item`
 - **Horizontal Rules** - `---`
 
-## 📋 Text Selection
+## 📋 Text Selection and Copy Function
+
+### Why Manual Copy Implementation?
+
+AnimationTextView uses `CATextLayer` for high-performance character-by-character animation rendering. Unlike standard `UITextView` or `UILabel`, `CATextLayer` doesn't provide built-in text selection and copy functionality. Therefore, we've implemented a custom text selection system to maintain the smooth animation experience while providing essential text interaction features.
+
+**Key differences from native text views:**
+- 🎨 **Custom Rendering** - Uses Core Animation layers for optimal performance
+- 🔧 **Manual Selection** - Custom implementation of text selection logic
+- 📋 **System Integration** - Seamlessly integrates with iOS copy/paste system
+- ⚡ **Performance Focus** - Maintains 60fps animation while supporting text interaction
+
+### Usage
 
 - **Long press** to start selection
 - **Drag** to adjust selection range
 - **Handles** to fine-tune selection
 - **Copy** support with system menu
 - Automatic scroll view detection and handling
+
+The selection system automatically detects text boundaries and provides visual feedback with customizable selection handles, ensuring a native iOS experience despite the custom implementation.
 
 ## 🤖 AI Streaming Output
 
