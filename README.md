@@ -24,6 +24,7 @@ A powerful and customizable animated text view for iOS that supports Markdown re
 
 ## 📸 Screenshots
 
+![演示](./Display Resource/First.gif)
 <p align="center">
   <img src="screenshots/demo1.gif" width="250" alt="Demo 1" />
   <img src="screenshots/demo2.gif" width="250" alt="Demo 2" />
