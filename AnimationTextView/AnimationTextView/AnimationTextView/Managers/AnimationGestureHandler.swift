@@ -117,13 +117,19 @@ class AnimationGestureHandler: NSObject {
 extension AnimationGestureHandler: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        // Long press can work with other gestures
         if gestureRecognizer == longPressGesture {
+            if otherGestureRecognizer is UIPanGestureRecognizer,
+               otherGestureRecognizer.view is UIScrollView {
+                return false
+            }
             return true
         }
         
-        // Pan gesture should not work with scroll view when selecting
         if gestureRecognizer == panGesture {
+            if otherGestureRecognizer is UIPanGestureRecognizer,
+               otherGestureRecognizer.view is UIScrollView {
+                return false
+            }
             return delegate?.gestureHandlerShouldRecognizeSimultaneously() ?? true
         }
         
@@ -131,6 +137,33 @@ extension AnimationGestureHandler: UIGestureRecognizerDelegate {
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return isEnabled
+        if !isEnabled {
+            return false
+        }
+        
+        if gestureRecognizer == panGesture {
+            return true
+        }
+        
+        return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if (gestureRecognizer == panGesture || gestureRecognizer == longPressGesture),
+           otherGestureRecognizer.view is UIScrollView {
+            return false
+        }
+        return false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if (gestureRecognizer == panGesture || gestureRecognizer == longPressGesture),
+           otherGestureRecognizer.view is UIScrollView {
+            if let delegate = delegate,
+               !delegate.gestureHandlerShouldRecognizeSimultaneously() {
+                return true
+            }
+        }
+        return false
     }
 }
