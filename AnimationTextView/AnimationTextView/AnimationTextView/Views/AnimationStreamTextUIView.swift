@@ -382,7 +382,7 @@ extension AnimationStreamTextUIView {
         feedback.notificationOccurred(.success)
         
         let label = UILabel()
-        label.text = "已复制"
+        label.text = "Copied"
         label.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         label.textColor = .white
         label.font = .systemFont(ofSize: 14)
