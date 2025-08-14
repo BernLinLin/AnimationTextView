@@ -6,12 +6,31 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
+    private var animationTheme: AIAnimationTextStyleTheme {
+        var theme = AIAnimationTextStyleTheme()
+        theme.lineSpace = 1.6
+        theme.font = .systemFont(ofSize: 16, weight: .regular)
+        theme.textColor = .black
+    
+        theme.headingFonts[1] = theme.roundedSystemFont(ofSize: 25, weight: .bold)
+        theme.headingFonts[2] = theme.roundedSystemFont(ofSize: 25, weight: .bold)
+        
+        theme.boldFont = .systemFont(ofSize: 16, weight: .semibold)
+        theme.italicFont = .italicSystemFont(ofSize: 16)
+        
+        theme.linkStyle.color = UIColor.systemBlue
+        theme.linkStyle.font = .systemFont(ofSize: 16, weight: .semibold)
+        
+        return theme
+    }
+    
     @State private var displayText = ""
     
     private let fullMarkdownText = """
-            # Welcome to AnimationTextView
+            # Welcome to AnimationText
             
             This is a high-performance text animation view built with `CATextLayer`.
             
@@ -38,9 +57,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             ScrollView {
-                AnimationTextView(text: displayText, theme: .default) { url in
-                    debugPrint("@___click: \(url)")
-                }
+                AIAnimationTextView(
+                    text: displayText,
+                    theme: animationTheme,
+                    onLinkTapped: { url in
+                        debugPrint("@___click: \(url)")
+                    }
+                )
                 .padding()
             }
             
@@ -84,7 +107,7 @@ private extension ContentView {
        displayText = ""
        currentIndex = 0
        
-       timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
            if currentIndex < fullMarkdownText.count {
                let index = fullMarkdownText.index(fullMarkdownText.startIndex, offsetBy: currentIndex)
                displayText.append(fullMarkdownText[index])
