@@ -207,8 +207,17 @@ private extension AIAnimationTextUIView {
     func createAttributedString(for text: String, with attributes: AIAnimationTextParsedItem.Attributes) -> NSAttributedString {
         var finalFont: UIFont
         
-        if attributes.linkURL != nil, let linkFont = theme.linkStyle.font {
+        var stringAttributes: [NSAttributedString.Key: Any] = [
+            .kern: theme.characterSpace,
+            .foregroundColor: theme.textColor
+        ]
+        
+        if let linkURL = attributes.linkURL, let linkFont = theme.linkStyle.font {
             finalFont = linkFont
+            stringAttributes[.foregroundColor] = theme.linkStyle.color
+            if let url = URL(string: linkURL) {
+                stringAttributes[.link] = url
+            }
         }
         else if attributes.headingLevel > 0, let headingFont = theme.headingFonts[attributes.headingLevel] {
             finalFont = headingFont
@@ -221,24 +230,15 @@ private extension AIAnimationTextUIView {
         }
         else if attributes.isCode, let codeFont = theme.codeFont {
             finalFont = codeFont
+            stringAttributes[.foregroundColor] = theme.codeStyle.textColor
+            stringAttributes[.backgroundColor] = theme.codeStyle.backgroundColor
         }
         else {
             finalFont = theme.font
         }
 
-        var stringAttributes: [NSAttributedString.Key: Any] = [
-            .font: finalFont,
-            .kern: theme.characterSpace
-        ]
+        stringAttributes[.font] = finalFont
         
-        if let linkURL = attributes.linkURL {
-            stringAttributes[.foregroundColor] = theme.linkStyle.color
-            if let url = URL(string: linkURL) {
-                stringAttributes[.link] = url
-            }
-        } else {
-            stringAttributes[.foregroundColor] = theme.textColor
-        }
         
         if attributes.isStrikethrough {
             stringAttributes[.strikethroughStyle] = NSUnderlineStyle.single.rawValue

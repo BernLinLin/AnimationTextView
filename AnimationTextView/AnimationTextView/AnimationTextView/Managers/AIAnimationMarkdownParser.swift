@@ -135,7 +135,7 @@ class AIAnimationMarkdownParser {
                 continue
             }
             
-            if oneChar == "*" {
+            if oneChar == "*" || oneChar == "_" {
                 inlineAttributes.isItalic.toggle()
                 i = content.index(i, offsetBy: 1)
                 continue

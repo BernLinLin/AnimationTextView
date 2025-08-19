@@ -11,7 +11,7 @@ import UIKit
 struct ContentView: View {
     private var animationTheme: AIAnimationTextStyleTheme {
         var theme = AIAnimationTextStyleTheme()
-        theme.lineSpace = 1.6
+        theme.lineSpace = 1.2
         theme.font = .systemFont(ofSize: 16, weight: .regular)
         theme.textColor = .black
     
